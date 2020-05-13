@@ -35,12 +35,12 @@ func NewNovel() *Novel {
 }
 
 // 判断小说是否存在
-func (this *Novel) IsExists(name string) bool {
+func (this *Novel) IsExists(name, author string) bool {
 	if len(name) == 0 {
 		return false
 	}
 
-	nov := models.NovelModel.GetByName(name)
+	nov := models.NovelModel.GetByName(name, author)
 	if nov != nil {
 		return true
 	}
@@ -83,8 +83,8 @@ func (this *Novel) AddLink(novId uint32, link, source, chapterLink string) error
 }
 
 // 判断小说是否存在
-func (this *Novel) GetByName(name string) *models.Novel {
-	nov := models.NovelModel.GetByName(name)
+func (this *Novel) GetByName(name, author string) *models.Novel {
+	nov := models.NovelModel.GetByName(name, author)
 
 	return nov
 }

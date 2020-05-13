@@ -162,14 +162,14 @@ func (m *Novel) Delete(forceDelete ...bool) error {
 }
 
 // 判断小说是否存在
-func (m *Novel) GetByName(name string) *Novel {
+func (m *Novel) GetByName(name, Author string) *Novel {
 	var n Novel
 
 	if len(name) == 0 {
 		return &Novel{}
 	}
 
-	m.query().Filter("name", name).One(&n, "id", "author", "cover", "desc", "created_at")
+	m.query().Filter("name", name).Filter("author", Author).One(&n, "id", "author", "cover", "desc", "created_at")
 
 	return &n
 }
